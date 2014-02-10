@@ -39,7 +39,7 @@ This paper describes the electronic, mechanical and software designs developed b
 All students that work in this project are members of the Laboratório de Robótica e Inteligência Computacional at IME. The previous studies \cite{alexandre}\cite{marco} provided the basis for the current structure of software and hardware team's. This paper describe the computer, electronic and mechanical design.
 
 \section{Software System}
-	The software system consists basically of five modules: AI, LogPlayer, Simulated World, Support Simulation and Transmission. The modules were implemented using the Microsoft Visual Studio 2010 IDE, that allows a single solution integrated of projects in different programming languages (e.g. CSharp, C++), making the project more flexible for other programmers giving continuity to the implementation. 
+	The software system consists basically of five modules: AI, LogPlayer, Simulated World, Support Simulation and Transmission. The modules were implemented using the Microsoft Visual Studio 2010 IDE, that allows a single solution integrated of projects in different programming languages (e.g. CSharp, C++), making the project more flexible for other programmers giving continuity to the implementation.
 
 	We chose to adopt the fragmentation of the software project into modules to facilitating the implementation team. A UDP socket interface was adopted for communication between most modules giving independence to them. Some interfaces like between AI Module and Support Simulation Module, that need high performance, don't communicate using the UDP Socket interface. Figure \ref{fluxogramaSoftware} shows the block diagram of the software system.
 
@@ -61,7 +61,7 @@ All students that work in this project are members of the Laboratório de Robót
 \item Control position and orientation of the robot defining which speeds the robot actuators (motor, kicker and dribbler) must reach. These speeds will be passed to Transmission Module to be sent to the World (simulated or real);
 \end{itemize}
 
-	Among the many reactive behavioural control architectures, we have chosen STP (Skills, Tactics and Plays) architecture \cite{STP}. In order to create a plan, we use two algorithms: Minimax \cite{minimax} and BK-BGT (Behavioural Kinodynamic Balanced Growth Trees) \cite{zickler}. These algorithms works as Play on the STP architecture. 
+	Among the many reactive behavioural control architectures, we have chosen STP (Skills, Tactics and Plays) architecture \cite{STP}. In order to create a plan, we use two algorithms: Minimax \cite{minimax} and BK-BGT (Behavioural Kinodynamic Balanced Growth Trees) \cite{zickler}. These algorithms works as Play on the STP architecture.
 
 	On the implementation of Minimax, the players agents are based on objective (assessed by an objective function) and the minimax algorithm is used to define which heuristics (Skills, Tactics and Plays) to use. The objective function consider several factors: distance from the ball to the opposing goal, distance from the ball to the goal together, distance from the ball to the opposing players, among others. The two algorithms use the Support Simulation Module to creating a Physics-Based Robot Motion Planning.
 
@@ -82,7 +82,7 @@ Extended Kalman Filter (EKF) \cite{ekf} is used to offset the effects induced by
 \subsection{Support Simulation Module}
 
 	This module is part of F180 environment simulator. It simulates the physics of bodies presented in a match from the Small Size Robot League. Its also possible to make the control of robot actuators (motor, kicker and dribbler).
-	 
+
 	The simulator was developed using the PhysX Engine, that enables high performance processing physics calculations in a GPU. Figure \ref{roboSim} shows the robot in the simulator. This module can provide long-terms predictions, in opposition to the Kalman Filter that provides a short-term prediction.
 
 \subsection{Simulated World Module}
@@ -98,7 +98,7 @@ Extended Kalman Filter (EKF) \cite{ekf} is used to offset the effects induced by
 	The AI Module can configure the simulation environment of the Simulated World Module just sending an XML file, via UDP Socket, containing information for the construction of bodies in the simulator. This module has two simulated cameras which provide input to SSL-Vision, we use two OpenGL cameras and the images are sent through TCP sockets.
 
 \subsection{Transmission Module}
-	This module is responsible for delivering the speed to actuators and receiving status of the robot, such as real velocity of each motor, kick sensor status and power supply status, via radio in Real World or via UDP socket in Simulation World. This module is coded in CSharp language using the interface development Microsoft Visual Studio 2010 IDE. 
+	This module is responsible for delivering the speed to actuators and receiving status of the robot, such as real velocity of each motor, kick sensor status and power supply status, via radio in Real World or via UDP socket in Simulation World. This module is coded in CSharp language using the interface development Microsoft Visual Studio 2010 IDE.
 
 \section{Path Planning}
 
@@ -110,12 +110,12 @@ Path planning algorithm is based on the theory of Artificial Potential Field \ci
 RoboIME electronics consist of seven boards: (a) the Main board, responsible for communication between the other boards; (b) the Stamp board,  responsible  for the embedded computation; (c) the Kicker board, responsible for maintaining the high voltage to activate the kick shoot; (d) four motor controller board which are responsible for robot's motion control. These boards are described in details in this section.
 
 \subsection{Main Board}
-The Main Board features a socket to plugin the boards: kick's sensor, dribble's motor, four wheel's motor, four encoders and the power supply. There is a RFM12b SMD embedded which is a wireless transceiver operating in the 434 MHz band, set as up to 115.2 kbps, fully in agreement with with FCC and ETSI regulations. 
+The Main Board features a socket to plugin the boards: kick's sensor, dribble's motor, four wheel's motor, four encoders and the power supply. There is a RFM12b SMD embedded which is a wireless transceiver operating in the 434 MHz band, set as up to 115.2 kbps, fully in agreement with with FCC and ETSI regulations.
 
 The communication protocol used between the Stamp Board and the transceiver was Serial Peripheral Interface Bus (SPI), that  is a synchronous serial data link standard that operates in full duplex mode.
 
 \subsection{Stamp Board}
-This board is responsible  for performing all the logic functions. It is like a brain of the electronic system. There is a embedded micro-controller STM32F407, that has ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working in 168 MHz, that was programmed with C language using the  interface development CoIDE and Eclipse IDE. 
+This board is responsible  for performing all the logic functions. It is like a brain of the electronic system. There is a embedded micro-controller STM32F407, that has ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working in 168 MHz, that was programmed with C language using the  interface development CoIDE and Eclipse IDE.
 %vide http://www.st.com/st-web-ui/static/active/en/resource/sales_and_marketing/promotional_material/brochure/brstm32f4.pdf
 
 \subsection{Kicker Board}
@@ -176,7 +176,7 @@ need to be brought to perfection.
 Research in machine learning was started last year to predict enemy behaviour,
 but an implementation is not planned for Robocup 2014.
 
-To the June competition, following goals are being sought: 
+To the June competition, following goals are being sought:
 rework the remaining parts on the mechanical project such as making improvements on the coiling of the solenoid coil;
 stabilize the electronic project, including robot feedback and
 conclude the implementation of planning algorithms to be used in support decision making.
@@ -192,7 +192,7 @@ This research was partially supported by Fundação Carlos Chagas Filho de Ampar
 \bibitem{alexandre}
 Alexandre Tadeu Rossini da Silva:
 Comportamento social cooperativo na realização de tarefas em
-ambientes dinâmicos e competitivos. 
+ambientes dinâmicos e competitivos.
 Instituto Militar de Engenharia, Rio de Janeiro (2006)
 
 \bibitem{tdp}
@@ -207,7 +207,7 @@ Carnegie Mellon University, Pittsburgh, PA (2004)
 
 \bibitem{CPA}
 Khatib, O.:
-Real-Time Obstacle Avoidance for Manipulators and Mobile Robots. 
+Real-Time Obstacle Avoidance for Manipulators and Mobile Robots.
 In International Journal of Robotics Research, vol. 5, no. 1, p. 90-98 (1986)
 
 \bibitem{marco}
@@ -215,8 +215,8 @@ Marco Antonio Firmino de Sousa:
 Uma Plataforma para Cooperação Autónoma de Múltiplos Robôs
 Instituto Militar de Engenharia, Rio de Janeiro (2008)
 
-\bibitem{minimax} Russell, Stuart J.; Norvig, Peter: 
-Artificial Intelligence: A Modern Approach (2nd ed.) 
+\bibitem{minimax} Russell, Stuart J.; Norvig, Peter:
+Artificial Intelligence: A Modern Approach (2nd ed.)
 Upper Saddle River, New Jersey: Prentice Hall, pp. 163-171 (2003)
 
 \bibitem{zickler}
@@ -225,7 +225,7 @@ Physics-Based Robot Motion Planning in Dynamic Multi-Body Environments
 Carnegie Mellon University, Pittsburgh, PA (2010)
 
 \bibitem {ekf}
-Welch, G. and Bishop, G.:  
+Welch, G. and Bishop, G.:
 An introduction to the Kalman filter. Technical Report TR 95-041, Department of
 Computer Science, University of North Carolina (2001)
 
