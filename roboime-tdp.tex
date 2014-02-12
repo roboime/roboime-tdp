@@ -9,39 +9,50 @@
 \title{RoboIME : Team Description Paper for RoboCup 2014}
 \author{
  Andre O. P. Barcelos \and
- Diego F. de Almeida \and
  Douglas K. Paixão \and
  Jan L. L. Segre \and
  Lucas O. de Lima \and
- Luis R. L. Rodrigues \and
  Naum A. F. Barreira \and
  Paulo F. F. Rosa \and
  Rafael C. Felzenszwalb \and
  Renan Gemignani \and
  Robinson C. M. B. Filho \and
- Stefano H. Rodrigues \and
- Thiago A. N. do Amaral \and
  Vitor H. F. Betio \and
- Vitor L. H. Ferreira \and
  Victor Bramigk
 }
 
-\institute{Seção de Engenharia de Computação \\ Instituto Militar de Engenharia (IME) \\ Praça General Tibúrcio, 80 - Praia Vermelha, Urca \\ Rio de Janeiro - RJ - Brazil \\ \email{roboime@googlegroups.com}}
+\institute{Instituto Militar de Engenharia (IME) \\ Praça General Tibúrcio, 80 - Praia Vermelha, Urca \\ Rio de Janeiro - RJ - Brazil \\ \email{roboime@googlegroups.com}}
 \maketitle
 %
 \begin{abstract}
-This paper describes the electronic, mechanical and software designs developed by RoboIME Team in order to join RoboCup 2014. All designs are in agreement with the rules of Small Size League 2014. This is the second RoboIME participation in a world level RoboCup event, although the team was already challenged third in Brazilian competitions.
+This paper describes the electronic, mechanical and software designs developed by RoboIME
+Team in order to join RoboCup 2014. All designs are in agreement with the rules of Small
+Size League 2014. This is the second RoboIME participation in a world level RoboCup event,
+although the team was already challenged third in Brazilian competitions.
 \end{abstract}
 
 \section{Introduction}
-    RoboIME is a small-size league soccer robot team from IME, Rio de Janeiro, Brazil. This is only the third time the team is taking part in competitions. The main result was in 2012 when the team achieved second place in Latin American Robotics Competition.
+    RoboIME is a small-size league soccer robot team from IME, Rio de Janeiro, Brazil. This
+is only the third time the team is taking part in competitions. The main result was in 2012
+when the team achieved second place in Latin American Robotics Competition.
 
-All students that work in this project are members of the Laboratório de Robótica e Inteligência Computacional at IME. The previous studies \cite{alexandre}\cite{marco} provided the basis for the current structure of software and hardware team's. This paper describe the computer, electronic and mechanical design.
+All students that work in this project are members of the Laboratório de Robótica e
+Inteligência Computacional at IME. The previous studies \cite{alexandre}\cite{marco} provided
+the basis for the current structure of software and hardware team's. This paper describe the
+computer, electronic and mechanical design.
 
 \section{Software System}
-	The software system consists basically of five modules: AI, LogPlayer, Simulated World, Support Simulation and Transmission. The modules were implemented using the Microsoft Visual Studio 2010 IDE, that allows a single solution integrated of projects in different programming languages (e.g. CSharp, C++), making the project more flexible for other programmers giving continuity to the implementation.
+	The software system consists basically of five modules: AI, LogPlayer, Simulated World,
+Support Simulation and Transmission. The modules were implemented using the Microsoft Visual
+Studio 2010 IDE, that allows a single solution integrated of projects in different programming
+languages (e.g. CSharp, C++), making the project more flexible for other programmers giving
+continuity to the implementation.
 
-	We chose to adopt the fragmentation of the software project into modules to facilitating the implementation team. A UDP socket interface was adopted for communication between most modules giving independence to them. Some interfaces like between AI Module and Support Simulation Module, that need high performance, don't communicate using the UDP Socket interface. Figure \ref{fluxogramaSoftware} shows the block diagram of the software system.
+	We chose to adopt the fragmentation of the software project into modules to facilitating
+the implementation team. A UDP socket interface was adopted for communication between most modules
+giving independence to them. Some interfaces like between AI Module and Support Simulation Module,
+that need high performance, don't communicate using the UDP Socket interface. Figure \ref{fluxogramaSoftware}
+shows the block diagram of the software system.
 
 \begin{figure}[thpb]
      \centering
@@ -54,23 +65,36 @@ All students that work in this project are members of the Laboratório de Robót
 	This is the largest and most complex software module. It is responsible for the following features:
 \begin{itemize}
 \item Collect, interpret and filter data from the Referee-Box, SSL-Vision, Transmission Module (real world or simulated), Support Simulation Module and Joystick;
-\item Take high level decisions to define the actions that robot should do (i.e., to find the position and orientation that robot has to reached, find the force to kick the ball, find the torque to dribble the ball);
+\item Take high level decisions to define the actions that robot should do (i.e., to find the position
+and orientation that robot has to reached, find the force to kick the ball, find the torque to dribble the ball);
 \item Use the Support Simulation Module to create a planning;
 \item Make a short future preview of the world (real or simulated) using data from the sensors (encoder, camera, infra-red);
 \item Make the configuration of the simulation environment Simulated World (setting bodies existing in the simulation);
-\item Control position and orientation of the robot defining which speeds the robot actuators (motor, kicker and dribbler) must reach. These speeds will be passed to Transmission Module to be sent to the World (simulated or real);
+\item Control position and orientation of the robot defining which speeds the robot actuators (motor,
+kicker and dribbler) must reach. These speeds will be passed to Transmission Module to be sent to the World (simulated or real);
 \end{itemize}
 
-	Among the many reactive behavioural control architectures, we have chosen STP (Skills, Tactics and Plays) architecture \cite{STP}. In order to create a plan, we use two algorithms: Minimax \cite{minimax} and BK-BGT (Behavioural Kinodynamic Balanced Growth Trees) \cite{zickler}. These algorithms works as Play on the STP architecture.
+	Among the many reactive behavioural control architectures, we have chosen STP (Skills, Tactics and Plays)
+architecture \cite{STP}. In order to create a plan, we use two algorithms: Minimax \cite{minimax} and
+BK-BGT (Behavioural Kinodynamic Balanced Growth Trees) \cite{zickler}. These algorithms works as Play on the
+STP architecture.
 
-	On the implementation of Minimax, the players agents are based on objective (assessed by an objective function) and the minimax algorithm is used to define which heuristics (Skills, Tactics and Plays) to use. The objective function consider several factors: distance from the ball to the opposing goal, distance from the ball to the goal together, distance from the ball to the opposing players, among others. The two algorithms use the Support Simulation Module to creating a Physics-Based Robot Motion Planning.
+	On the implementation of Minimax, the players agents are based on objective (assessed by an objective function)
+and the minimax algorithm is used to define which heuristics (Skills, Tactics and Plays) to use. The objective function
+consider several factors: distance from the ball to the opposing goal, distance from the ball to the goal together,
+distance from the ball to the opposing players, among others. The two algorithms use the Support Simulation Module to
+creating a Physics-Based Robot Motion Planning.
 
-Extended Kalman Filter (EKF) \cite{ekf} is used to offset the effects induced by time latency in that accumulates in vision systems, AI, communication and execution of commands for the robot.
+Extended Kalman Filter (EKF) \cite{ekf} is used to offset the effects induced by time
+latency in that accumulates in vision systems, AI, communication and execution of commands for the robot.
 
 %XMLCONFIG, CONTROL POSE, The Communication provides an interface with a joystick to both the real robot when the simulation can be ccontrolled by one person.
 
 \subsection{LogPlayer Module}
-	This module is important to debug the planning algorithms. AI Module creates a log file with all the information necessary to describe the tree planning, so using the LogPlayer Module we can play the log files to visualize all possible solutions present in the tree planning.
+	This module is important to debug the planning algorithms. AI Module creates
+a log file with all the information necessary to describe the tree planning, so using
+the LogPlayer Module we can play the log files to visualize all possible solutions
+present in the tree planning.
 
 \begin{figure}[thpb]
 	\centering
@@ -86,7 +110,10 @@ Extended Kalman Filter (EKF) \cite{ekf} is used to offset the effects induced by
 	The simulator was developed using the PhysX Engine, that enables high performance processing physics calculations in a GPU. Figure \ref{roboSim} shows the robot in the simulator. This module can provide long-terms predictions, in opposition to the Kalman Filter that provides a short-term prediction.
 
 \subsection{Simulated World Module}
-	This module is also part of the simulator designed to F180's environment. But this module replaces the Real World, when it is not convenient to use it. Thus this module receives through UDP sockets the speeds that the actuators of the robot must reach, the simulator has an internal controller to calculate the torque required to be applied to the actuators to achieve the desired speed (like real robot).
+	This module is also part of the simulator designed to F180's environment. But this module replaces the
+Real World, when it is not convenient to use it. Thus this module receives through UDP sockets the speeds that
+the actuators of the robot must reach, the simulator has an internal controller to calculate the torque required
+to be applied to the actuators to achieve the desired speed (like real robot).
 
 \begin{figure}[thpb]
 	\centering
@@ -95,27 +122,41 @@ Extended Kalman Filter (EKF) \cite{ekf} is used to offset the effects induced by
 	\label{prototype}
 \end{figure}
 
-	The AI Module can configure the simulation environment of the Simulated World Module just sending an XML file, via UDP Socket, containing information for the construction of bodies in the simulator. This module has two simulated cameras which provide input to SSL-Vision, we use two OpenGL cameras and the images are sent through TCP sockets.
+	The AI Module can configure the simulation environment of the Simulated World Module just sending an XML file,
+via UDP Socket, containing information for the construction of bodies in the simulator. This module has two simulated
+cameras which provide input to SSL-Vision, we use two OpenGL cameras and the images are sent through TCP sockets.
 
 \subsection{Transmission Module}
-	This module is responsible for delivering the speed to actuators and receiving status of the robot, such as real velocity of each motor, kick sensor status and power supply status, via radio in Real World or via UDP socket in Simulation World. This module is coded in CSharp language using the interface development Microsoft Visual Studio 2010 IDE.
+	This module is responsible for delivering the speed to actuators and receiving status of the robot, such as real velocity
+of each motor, kick sensor status and power supply status, via radio in Real World or via UDP socket in Simulation World. This
+module is coded in CSharp language using the interface development Microsoft Visual Studio 2010 IDE.
 
 \section{Path Planning}
 
-Path planning algorithm is based on the theory of Artificial Potential Field \cite{CPA}, which has as its fundamental principle driving the robot in an artificial force field generated by obstacles and the target. The potential (gradient) should be continuous. The obstacles (other robots) and the target (certain objective local) generating fields of repulsion and attraction, respectively, obtaining a movement by which avoids obstacles and possibly reach your goal.
+Path planning algorithm is based on the theory of Artificial Potential Field \cite{CPA}, which has as its fundamental principle driving
+the robot in an artificial force field generated by obstacles and the target. The potential (gradient) should be continuous.
+The obstacles (other robots) and the target (certain objective local) generating fields of repulsion and attraction, respectively,
+obtaining a movement by which avoids obstacles and possibly reach your goal.
 
 %FAZER A PARTE DO A-ESTRELA
 
 \section{Electronic Project}
-RoboIME electronics consist of seven boards: (a) the Main board, responsible for communication between the other boards; (b) the Stamp board,  responsible  for the embedded computation; (c) the Kicker board, responsible for maintaining the high voltage to activate the kick shoot; (d) four motor controller board which are responsible for robot's motion control. These boards are described in details in this section.
+RoboIME electronics consist of seven boards: (a) the Main board, responsible for communication between the other boards; (b) the Stamp board,
+responsible  for the embedded computation; (c) the Kicker board, responsible for maintaining the high voltage to activate the kick shoot;
+(d) four motor controller board which are responsible for robot's motion control. These boards are described in details in this section.
 
 \subsection{Main Board}
-The Main Board features a socket to plugin the boards: kick's sensor, dribble's motor, four wheel's motor, four encoders and the power supply. There is a RFM12b SMD embedded which is a wireless transceiver operating in the 434 MHz band, set as up to 115.2 kbps, fully in agreement with with FCC and ETSI regulations.
+The Main Board features a socket to plugin the boards: kick's sensor, dribble's motor, four wheel's motor, four encoders and the power supply.
+There is a RFM12b SMD embedded which is a wireless transceiver operating in the 434 MHz band, set as up to 115.2 kbps, fully in agreement
+with FCC and ETSI regulations.
 
-The communication protocol used between the Stamp Board and the transceiver was Serial Peripheral Interface Bus (SPI), that  is a synchronous serial data link standard that operates in full duplex mode.
+The communication protocol used between the Stamp Board and the transceiver was Serial Peripheral Interface Bus (SPI), that  is a synchronous
+serial data link standard that operates in full duplex mode.
 
 \subsection{Stamp Board}
-This board is responsible  for performing all the logic functions. It is like a brain of the electronic system. There is a embedded micro-controller STM32F407, that has ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working in 168 MHz, that was programmed with C language using the  interface development CoIDE and Eclipse IDE.
+This board is responsible  for performing all the logic functions. It is like a brain of the electronic system. There is a embedded micro-controller STM32F407,
+that has ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working in 168 MHz, that was programmed with C language using the  interface development
+CoIDE and Eclipse IDE.
 %vide http://www.st.com/st-web-ui/static/active/en/resource/sales_and_marketing/promotional_material/brochure/brstm32f4.pdf
 
 \subsection{Kicker Board}
@@ -182,9 +223,10 @@ stabilize the electronic project, including robot feedback and
 conclude the implementation of planning algorithms to be used in support decision making.
 
 \section*{Acknowledgements}
-This research was partially supported by Fundação Carlos Chagas Filho de Amparo a Pesquisa do Estado do Rio de Janeiro -FAPERJ(grant E-26/111.362/2012); Fundação Ricardo Franco (FRF) and Fabrica de Material de Comunicação e Eletrônica (FMCE/IMBEL). The team also acknowledges the assistance of Mr. Carlos Beckhauser from FMCE.
-
-
+This research was partially supported by Fundação Carlos Chagas Filho de Amparo a Pesquisa do Estado do Rio de Janeiro -FAPERJ(grant E-26/111.362/2012);
+Fundação Ricardo Franco (FRF) and Fabrica de Material de Comunicação e Eletrônica (FMCE/IMBEL). The team also acknowledges the assistance of Mr. Carlos
+Beckhauser from FMCE. Special thanks to Diego F. de Almeida, Luis R. L. Rodrigues, Stefano H. Rodrigues, Thiago A. N. do Amaral and Vitor L. H. Ferreira,
+old team members that made this project possible.
 
 \begin{thebibliography}{7}
 %%%%%%%%%%%%%%%%%%%%%%
