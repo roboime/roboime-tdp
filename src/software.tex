@@ -6,6 +6,7 @@ The software systems consist of three projects: pyroboime (AI), ssl-webclient (g
 
 The AI, pyroboime, is based on the STP (Skill-Tactic-Play) architecture and implemented in python.
 It has the following components: interface with the ssl-vision, ssl-refbox and grSim, it also has a built-in communication module for the radio transmitter system.
+The block diagram of the AI software is presented in figure \ref{fluxogramSoftware}.
 
 The STP is a three tier architecture where the lowest level, skills, enables the low level manipulations on a single robot.
 The middle layer, tactics, makes use of the skill layer to execute higher level behaviour, possibly enabling coopration, but still acting on a single robot.
@@ -20,12 +21,14 @@ Among the filters in said stack is a Kalman filter that reduces the noise commin
 
 The built-in radio trasmitter system interfaces with libusb to control the transmitter hardware, which is connected via USB.
 
+\begin{landscape}
 \begin{figure}[thpb]
      \centering
-     \includegraphics[width=15cm]{img/software-model.png}
+     \includegraphics[width=21cm]{img/software-model.png}
      \caption{Block diagram of the AI software}
      \label{fluxogramSoftware}
 \end{figure}
+\end{landscape}
 
 \subsection{Support systems}
 
