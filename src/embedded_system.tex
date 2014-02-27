@@ -1,6 +1,6 @@
-\section{Embedded System}
+\section{Embedded System}\label{emb_sys_sec}
 RoboIME electronics consist of seven boards: (a) the Main board, responsible for communication between the other boards; (b) the Stamp board,
-responsible  for the embedded computation; (c) the Kicker board, responsible for maintaining the high voltage to activate the kick shoot;
+responsible  for the embedded computation; (c) the Kicker board, responsible for maintaining high voltage to activate the kick shoot;
 (d) four motor controller board which are responsible for robot's motion control. These boards are described in details in this section.
 
 \subsection{Main Board}
@@ -12,14 +12,14 @@ The communication protocol used between the Stamp Board and the transceiver was 
 serial data link standard that operates in full duplex mode.
 
 \subsection{Stamp Board}
-This board is responsible  for performing all the logic functions. It is like a brain of the electronic system. There is a embedded micro-controller STM32F407,
-that has ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working in 168 MHz, that was programmed with C language using the  interface development
+This board is responsible  for performing all the logic functions. It is like a brain of the electronic system. There is an embedded micro-controller STM32F407,
+with ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working in 168 MHz, that was programmed with C language using the  interface development
 CoIDE and Eclipse IDE.
 %vide http://www.st.com/st-web-ui/static/active/en/resource/sales_and_marketing/promotional_material/brochure/brstm32f4.pdf
 
 \subsection{Kicker Board}
 This board is responsible for controlling the kick strength. There are two kinds of kick,
-the kick shoot and the high kick. Two capacitors of 2200 $\mu$F, 200 V are used store the
+the kick shoot and the high kick. Two capacitors of 2200 $\mu$F, 200 V are used to store the
 voltage in a boost circuit. The charge is discharged in a solenoid and depending on the PWM
 signal the kick device is activated, it is possible to control the kick velocity.
 
@@ -28,6 +28,6 @@ signal the kick device is activated, it is possible to control the kick velocity
 \subsection{Motor Controller Board}
 The idea of the RoboIME electronic is to modularize the electronic project. So, there
 is controller module board for each wheel's motor. If one of them burns out, it is
-possible to change quickly. Each board has two TC4427 (MOSFET driver) and two
+possible to exchange it quickly. Each board has two TC4427 (MOSFET driver) and two
 IRF7319 (half H bridge). These ICs create a H-bridge, allowing velocity control in
 both directions.
