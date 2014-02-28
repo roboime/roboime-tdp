@@ -1,19 +1,23 @@
 \section{Embedded System}\label{emb_sys_sec}
-RoboIME electronics consist of seven boards: (a) the Main board, responsible for communication between the other boards; (b) the Stamp board, responsible for the embedded computations; (c) the Kicker board, responsible for maintaining high voltage to activate the kickers; (d) four motor controller boards which are responsible for the robot's motion control. These boards are described in details in this section.
+RoboIME electronics consist of nine boards: (a) the Main board, responsible for communication between the other boards; (b) the Stamp board, responsible for the embedded computations; (c) the Kicker board, responsible for maintaining high voltage and activate the kickers; (d) five motor controller boards which are responsible for the robot's motion control and the dribbling device. (e)Transceiver board, which is responsible for the link between the robot and the main computer. These boards are described in details in this section.
 
 \subsection{Main Board}
-The Main Board features a socket to plug the boards in: the kicker's sensor, dribbler motor, four wheels' motors, four encoders and the power supply. There is a RFM12b SMD embedded, which is a wireless transceiver operating in the 434 MHz band, set up for 115.2 kbps, fully compliant with FCC and ETSI regulations.
+The Main Board features a socket to plug the boards in: the kicker's sensor, a optical sensor that is used to detect if the robot is with the ball possession, dribbler motor, which makes possible to the robot to spin and to move backward without lose the ball, four wheels' motors, four quadrature encoders and the power supply with safety devices. 
 
-The communication protocol used between the Stamp Board and the transceiver is a Serial Peripheral Interface Bus (SPI), a synchronous serial data link standard that operates in full duplex mode.
+
 
 \subsection{Stamp Board}
-This board is responsible  for performing all the logical functions. Serving as a brain of sorts for the electronic system. There is an embedded STM32F407 micro-controller, with an ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working at 168 MHz, that was programmed in C language using CoIDE and Eclipse IDEs.
+This board is responsible  for performing all the logical functions. Serving as a brain of sorts for the electronic system. There is an embedded STM32F407VG micro-controller, with an ARM Cortex M4 as main CPU, 1 MB Flash, 192 KB RAM memory, working at 168 MHz, that was programmed in C language using CoIDE and Eclipse IDEs. The main function of the embedded system is to receive the data from the AI and convert it into movement. So, there is a Proportional Derivative Integrative Control sampling the real wheel's velocity, comparing with the desired and outputting the appropriate voltage to the motor. That control has the fundamental importance of look for the right wheel's velocity. There is also a current control that doesn't permit the Motor Controller Board to burn out. 
 %vide http://www.st.com/st-web-ui/static/active/en/resource/sales_and_marketing/promotional_material/brochure/brstm32f4.pdf
 
 \subsection{Kicker Board}
-This board is responsible for controlling the kick strength. There are two kinds of kick, the forward kick and the high kick. Two capacitors of 2200 $\mu$F, 200 V are used to store the voltage in a boost circuit. The charge is discharged in a solenoid and depending on the PWM signal one of the kicker devices is activated, controlling the kick velocity.
+This board is responsible for produce the high voltage used to activate the two coils, controlling the kick strength and discharge almost instantly all the power stored on the coils. There are two kinds of kick, the forward kick and the high kick. There are two steps in this board: charge and discharge. The first has the unique function of keep a constant output of 180V DC from a input of 7~8V DC. A DC-DC step-up power supply controlled by the MC34063 IC and two electrolytic capacitors of 2200 $\mu$F, 200 V are used for this task. The second is to drive the kickers. In this part are used one TC4427 Mosfet Driver IC and two IRFP4868PBF Power Mosfet that are responsible for close the high voltage circuit of the first step with the ground through the coil, converting electrical into mechanical energy. A precise control of the actuation time ensure that the kick will occur with the right velocity. 
 
 %include image of high kick
 
 \subsection{Motor Controller Board}
-The idea of the RoboIME electronic is to modularize the electronic project. So, there is one controller module board for each wheel motor. If one of them burns out, it is possible to exchange it quickly. Each board has two TC4427 (MOSFET driver) and two IRF7319 (half H bridge). These ICs create an H-bridge, allowing for velocity control in both directions.
+The idea of the RoboIME electronic is to modularize the electronic project. So, there is one controller module board for each wheel motor. If one of them burns out, it is possible to exchange it quickly. Each board has two TC4427 (MOSFET driver) and two IRF7319 (complementary half H bridge). These ICs create an H-bridge, allowing the velocity control in both directions through a Pulse-Width Modulation, converting a digital signal input into an analog output . 
+
+
+\subsection{Transceiver Board}
+The transceiver board is responsible for the link between the micro-controller and the main computer through a RFM12B transceiver. The first is done using a own protocol, operating in the 434 MHz band, simplex, set up for 20 kbps, fully compliant with FCC and ETSI regulations. The second is accomplished through the Serial Peripheral Interface Bus (SPI), a standard 
