@@ -1,17 +1,25 @@
-\section{Software System}\label{soft_sys_sec}
+\section{Software Solutions}\label{soft_sys_sec}
 
 The software systems consist of three projects: pyroboime (AI), ssl-webclient (graphical client), grSim (simulator).
 
-\subsection{AI}
+\subsection{Artificial Intelligence}
 
 The AI, pyroboime, is based on the STP (Skill-Tactic-Play) architecture and implemented in python.
 It has the following components: interface with the ssl-vision, ssl-refbox and grSim, it also has a built-in communication module for the radio transmitter system.
-The block diagram of the AI software is presented in figure \ref{fluxogramSoftware}.
+%The block diagram of the AI software is presented in figure \ref{fluxogramSoftware}.
 
 The STP is a three tier architecture where the lowest level, skills, enables the low level manipulations on a single robot.
 The middle layer, tactics, makes use of the skill layer to execute higher level behaviour, possibly enabling coopration, but still acting on a single robot.
 The upper layer, plays, coordinates the tactics associated to each robot in order to maximize performance, each play is implemented to behave according to specific states: stop, halt, indirect kicks and normal play.
 A higher level layer implmented as a play switches between other plays based on the current referee state.
+This architecture is better depicted in figure \ref{STPDiagram}.
+
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=12cm]{img/stp.eps}
+     \caption{STP Diagram}
+     \label{STPDiagram}
+\end{figure}
 
 There is also a skill implemented to redirect inputs from a joystick such that it is possible to test the robot with little effort.
 
@@ -22,12 +30,12 @@ Among the filters in said stack is a Kalman filter that reduces the noise commin
 The built-in radio trasmitter system interfaces with libusb to control the transmitter hardware, which is connected via USB.
 
 %\begin{landscape}
-\begin{figure}[thpb]
-     \centering
-     \includegraphics[width=15cm]{img/software-model.png}
-     \caption{Block diagram of the AI software}
-     \label{fluxogramSoftware}
-\end{figure}
+%\begin{figure}[H]
+%     \centering
+%     \includegraphics[width=12cm]{img/software-model.png}
+%     \caption{Block diagram of the AI software}
+%     \label{fluxogramSoftware}
+%\end{figure}
 %\end{landscape}
 
 \subsection{Support systems}
@@ -37,6 +45,13 @@ It has the following functionality: displaying and altering the AI state, broadc
 
 Lastly the simulator, grSim, originally developed by Parsian Robotic, was customized to fit our needs.
 It provides the following functionality: simulating the game environment and exposing an ssl-vision compliant protocol.
+
+\begin{figure}[H]
+     \centering
+     \includegraphics[width=12cm]{img/grsim.png}
+     \caption{Snapshot of the simulator}
+     \label{simulatorSnapshot}
+\end{figure}
 
 \subsection{Source}
 
