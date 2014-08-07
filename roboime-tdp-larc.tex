@@ -1,0 +1,96 @@
+\documentclass[conference]{IEEEtran}
+
+% The following packages can be found on http:\\www.ctan.org
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{makeidx}
+%\usepackage{subfigure}
+\usepackage{lscape}
+\usepackage{float}
+\usepackage{hyperref}
+\IEEEoverridecommandlockouts  % This command is only needed if 
+                              % you want to use the \thanks command
+\overrideIEEEmargins          % Needed to meet printer requirements.
+
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+\title{\LARGE \bf
+RoboIME: on the road to LARC 2014
+}
+
+
+%\author{Albert Author$^{1}$ and Bernard D. Researcher$^{2}$% <-this % stops a space
+%\thanks{*This work was not supported by any organization}% <-this % stops a space
+%\thanks{$^{1}$Albert Author is with Faculty of Electrical Engineering, Mathematics and Computer Science,
+%        University of Twente, 7500 AE Enschede, The Netherlands
+%        {\tt\small albert.author@papercept.net}}%
+%\thanks{$^{2}$Bernard D. Researcheris with the Department of Electrical Engineering, Wright State University,
+%        Dayton, OH 45435, USA
+%        {\tt\small b.d.researcher@ieee.org}}%
+%}
+
+\author{
+  \IEEEauthorblockN{%
+    Gabrielle B. do Nascimento \and
+    Jan L. L. Segre \and
+    Lucas O. de Lima \and
+    Naum A. F. Barreira \and
+    Marina M. de Lima \and
+    Rafhael J. Lima \and
+    Renan Gemignani \and
+    Robinson Calou M. B. Filho \and
+    Vitor H. F. Betio \and
+    Victor Bramigk \and
+    Paulo F. F. Rosa}%
+  \IEEEauthorblockA{%
+    Instituto Militar de Engenharia (IME).
+    %Praça General Tibúrcio, 80 - Praia Vermelha, Urca,
+    Praca General Tiburcio, 80 - Praia Vermelha, Urca,
+    Rio de Janeiro RJ, Brasil}%
+    %{\tt\small roboime@googlegroups.com}}%
+}
+
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+\graphicspath{{img/}}
+
+
+\begin{document}
+
+\maketitle
+
+\input{src/abstract}
+\input{src/introduction}
+%\input{src/lit_review}
+\input{src/mechanics}
+\input{src/embedded_system}
+\input{src/software}
+\input{src/discussion}
+
+% This command serves to balance the column lengths
+% on the last page of the document manually. It shortens
+% the textheight of the last page by a suitable amount.
+% This command does not take effect until the next page
+% so it should come on the page before the last. Make
+% sure that you do not shorten the textheight too much.
+\addtolength{\textheight}{-12cm}
+
+\input{src/acknowledgements}
+\input{src/bibliography}
+
+\end{document}
+
+% vim: et sw=2 ts=2 tw=79
