@@ -3,6 +3,9 @@ RoboIME TDP
 
 This is the latex project used to write our TDP. Feel free to use it as a base for your team.
 
+Robocup
+-------
+
 As per [the qualification page][1] it must comply to the [Springer LNAI format][2].
 
 The latex class used on this project can be found on [this page][3].
